@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vente Auto en Pi</title>
+</head>
+<body>
+  <h1>Bienvenue sur Vente Automobile en Pi</h1>
+  <img src="public/voiture.jpg" alt="voiture" width="300"/>
+  <p>Prix de réservation : 0.01 Pi</p>
+  <button onclick="startPayment()">Payer 0.01 Pi</button>
+
+  <script src="pipay.js"></script>
+</body>
+</html>

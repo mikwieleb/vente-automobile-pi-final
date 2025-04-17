@@ -1,28 +1,18 @@
-function startPayment() {
-  if (!window.Pi) {
-    alert("Pi Network non détecté. Ouvre cette page dans l'application Pi Browser.");
-    return;
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.Pi) {
+    Pi.init({ version: "2.0" });
   }
+});
 
-  const paymentData = {
-    amount: 0.01,
-    memo: "Réservation véhicule",
-    metadata: { reservation: true }
-  };
-
-  Pi.createPayment(paymentData, {
-    onReadyForServerApproval: (paymentId) => {
-      console.log("Paiement prêt pour validation :", paymentId);
-    },
-    onReadyForServerCompletion: (paymentId, txid) => {
-      console.log("Paiement confirmé :", paymentId, txid);
-      alert("Paiement effectué !");
-    },
-    onCancel: (paymentId) => {
-      alert("Paiement annulé.");
-    },
-    onError: (error, paymentId) => {
-      console.error("Erreur :", error);
-    }
-  });
+async function payTest() {
+  try {
+    const payment = await window.Pi.createPayment({
+      amount: 0.001,
+      memo: "Paiement test VenteAutoPi",
+      metadata: { type: "test" }
+    });
+    alert("Paiement effectué ! " + JSON.stringify(payment));
+  } catch (error) {
+    alert("Erreur : " + error.message);
+  }
 }

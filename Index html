@@ -3,14 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vente Auto en Pi</title>
+  <title>VenteAutomobile.Pi</title>
+  <script defer src="pipay.js"></script>
+  <script defer src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #431d5b, #ffcc70);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      flex-direction: column;
+    }
+    img.logo {
+      width: 100px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+    .btn {
+      padding: 12px 24px;
+      font-size: 1rem;
+      background-color: #fff;
+      color: #431d5b;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      margin: 10px;
+    }
+    .btn:hover {
+      background-color: #ffe6a3;
+    }
+  </style>
 </head>
 <body>
-  <h1>Bienvenue sur Vente Automobile en Pi</h1>
-  <img src="public/voiture.jpg" alt="voiture" width="300"/>
-  <p>Prix de réservation : 0.01 Pi</p>
-  <button onclick="startPayment()">Payer 0.01 Pi</button>
-
-  <script src="pipay.js"></script>
+  <img src="https://i.imgur.com/Nyv5kZh.png" alt="Logo Pi Network" class="logo">
+  <h1>Bienvenue sur VenteAutomobile.Pi</h1>
+  <p>L'application Testnet pour acheter et vendre des véhicules avec Pi Network.</p>
+  <button class="btn" onclick="window.location.href='app.html';">Entrer dans l'application</button>
+  <button class="btn" onclick="payTest()">Payer 0.001 Pi (test)</button>
 </body>
 </html>

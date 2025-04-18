@@ -1,81 +1,81 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head> 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VenteAutomobile.Pi</title>
-<link rel="icon" type="image/png" href="/favicon.png">
-  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-  <script>
-    Pi.init({ version: "2.0" }); // Initialisation du SDK Pi
-  </script>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #431d5b, #ffcc70);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-    .container {
-      max-width: 90%;
-    }
-    img.logo {
-      width: 100px;
-      height: auto;
-      margin-bottom: 20px;
-    }
-    h1 {
-      font-size: 2.5rem;
-    }
-    p {
-      font-size: 1.2rem;
-      margin: 20px 0;
-    }
-    .btn {
-      padding: 12px 24px;
-      font-size: 1rem;
-      background-color: #fff;
-      color: #431d5b;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s ease;
-      margin: 10px;
-    }
-    .btn:hover {
-      background-color: #ffe6a3;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <img src="/logo.png" alt="Logo Pi Network" class="logo">
-    <h1>Bienvenue sur VenteAutomobile.Pi</h1>
-    <p>L'application Testnet pour acheter et vendre des véhicules avec Pi Network.</p>
-    <button class="btn" onclick="window.location.href='#';">Entrer dans l'application</button>
-    <br/>
-    <button class="btn" onclick="payTest()">Payer 0.001 Pi (test)</button>
-  </div>
 
-  <script>
-    async function payTest() {
-      try {
-        const payment = await Pi.createPayment({
-          amount: 0.001,
-          memo: "Paiement test VenteAutoPi",
-          metadata: { type: "test" }
-        });
-        alert("Paiement effectué ! " + JSON.stringify(payment));
-      } catch (error) {
-        alert("Erreur : " + error.message);
-      }
-    }
-  </script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vente Automobile Pi</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- Styles (ajoute tes propres styles ou liens vers des CSS externes) -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Logo de l'application -->
+    <img src="images/logo.png" alt="Logo de Vente Automobile Pi">
+
+    <h1>Bienvenue sur notre plateforme de vente automobile en Pi Network</h1>
+    <p>Effectuez un paiement de 0.001 Pi pour accéder à l'application et profiter de nos services.</p>
+
+    <!-- Bouton de paiement -->
+    <a href="javascript:void(0)" class="button" id="payButton">Payer 0.001 Pi et ouvrir l'application</a>
+
+    <!-- Script pour le paiement (SDK Pi Network) -->
+    <script src="https://cdn.jsdelivr.net/gh/pi-network/pi-sdk@latest/pi-sdk.js"></script>
+    <script>
+        document.getElementById('payButton').onclick = function () {
+            // Configuration du paiement
+            const paymentAmount = 0.001; // Montant du paiement en Pi
+            const receiverAddress = "TON_RECEIVER_ADDRESS"; // Remplace par l'adresse du destinataire (peut-être ton adresse Pi Network)
+            
+            // Demander un paiement
+            PiSDK.requestPayment({
+                amount: paymentAmount,
+                to: receiverAddress,
+                currency: "Pi", // Définir la devise Pi Network
+                callback: function (response) {
+                    // Si le paiement est confirmé
+                    if (response.status === "success") {
+                        alert("Paiement effectué avec succès. Bienvenue !");
+                        // Rediriger vers l'application après paiement réussi
+                        window.location.href = "https://ton-site.com/app"; // Remplace par l'URL de ton application
+                    } else {
+                        alert("Échec du paiement. Veuillez réessayer.");
+                    }
+                }
+            });
+        };
+    </script>
+
 </body>
+
 </html>

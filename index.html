@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vente Automobile Pi</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+      background-color: #f4f4f4;
+    }
+    img {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #612c9c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #4a2080;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="images/logo.png" alt="Logo">
+  <h1>Bienvenue sur Vente Automobile Pi</h1>
+  <p>Clique sur le bouton pour payer 0.001 Pi et entrer dans l'application</p>
+
+  <button onclick="pay()">Payer 0.001 Pi</button>
+
+  <script>
+    async function pay() {
+      const paymentData = {
+        amount: 0.001,
+        memo: "Accès à VenteAutomobile.pi",
+        metadata: { access: "app" },
+        to: "GA74T...VOLSV" // Remplace par ton vrai wallet Pi Testnet
+      };
+
+      try {
+        const scopes = ['payments'];
+        Pi.init({ version: "2.0", sandbox: true });
+
+        Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
+          Pi.createPayment(paymentData, {
+            onReadyForServerApproval: function(paymentId) {
+              console.log("Prêt pour validation serveur :", paymentId);
+            },
+            onReadyForServerCompletion: function(paymentId, txid) {
+              console.log("Transaction à finaliser :", paymentId, txid);
+              alert("Paiement effectué avec succès !");
+            },
+            onCancel: function(paymentId) {
+              console.log("Paiement annulé :", paymentId);
+            },
+            onError: function(error, payment) {
+              console.error("Erreur :", error);
+            }
+          });
+        }).catch(function(error) {
+          console.error("Erreur d'authentification :", error);
+        });
+      } catch (err) {
+        console.error("Erreur générale :", err);
+      }
+
+      function onIncompletePaymentFound(payment) {
+        console.log("Paiement incomplet trouvé :", payment);
+      }
+    }
+  </script>
+
+</body>
+</html>

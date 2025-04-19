@@ -1,93 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vente Automobile - Paiement Pi</title>
-
-  <!-- Favicon -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-
-  <!-- SDK Pi Network (Testnet) -->
+  <meta charset="UTF-8">
+  <title>Vente Automobile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-
-  <!-- Style simple -->
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f2f2f2;
-      padding: 50px;
-    }
-    img {
-      width: 150px;
-      margin-bottom: 20px;
-    }
-    h1 {
-      color: #333;
-    }
-    button {
-      display: block;
-      margin: 15px auto;
-      padding: 15px 25px;
-      font-size: 16px;
-      background-color: #5f4b8b;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #7a5cad;
-    }
-  </style>
 </head>
 <body>
-
-  <!-- Logo -->
-  <img src="logo.png" alt="Logo Vente Automobile" />
-
+  <img src="logo.png" alt="Logo Vente Automobile" style="width: 120px; margin-bottom: 20px;">
   <h1>Bienvenue sur Vente Automobile</h1>
-
-  <!-- Bouton paiement -->
-  <button onclick="payer()">Payer 0.001 Pi</button>
-
-  <!-- Bouton ouvrir l’application -->
-  <button onclick="ouvrirApplication()">Ouvrir l’application</button>
-
-  <!-- Script de gestion -->
-  <script>
-    // Initialisation SDK Pi (testnet)
-    Pi.init({ version: "2.0", sandbox: true });
-
-    function payer() {
-      Pi.createPayment(
-        {
-          amount: 0.001,
-          memo: "Paiement test VenteAuto",
-          metadata: { test: "venteauto" }
-        },
-        {
-          onReadyForServerApproval: function(paymentId) {
-            console.log("Paiement prêt pour l'approbation serveur", paymentId);
-          },
-          onReadyForServerCompletion: function(paymentId, txid) {
-            console.log("Paiement prêt pour finalisation", paymentId, txid);
-          },
-          onCancel: function(paymentId) {
-            console.log("Paiement annulé", paymentId);
-          },
-          onError: function(error, paymentId) {
-            console.error("Erreur de paiement", error);
-          }
-        }
-      );
-    }
-
-    function ouvrirApplication() {
-      window.location.href = "https://vente-automobile-pi-final.vercel.app"; // ou toute autre URL
-    }
-  </script>
-
+  <button id="payButton">Payer 0.001 π</button>
+  <button onclick="window.location.href='https://vente-automobile-pi-g6hd.vercel.app';">Ouvrir l'application</button>
+  <script src="pipay.js"></script>
 </body>
 </html>

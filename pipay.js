@@ -1,22 +1,19 @@
-Pi.init({ version: "2.0", sandbox: true });
+// Initialisation du SDK Pi
+Pi.init({ version: "2.0" });
 
-const paymentData = {
-  amount: 0.001,
-  memo: "Paiement Testnet",
-  metadata: { custom: "data" }
-};
+document.getElementById("payButton").addEventListener("click", function () {
+  Pi.createPayment({
+    amount: 0.001,
+    memo: "Test paiement",
+    metadata: { action: "paiement-test" }
+  }).then(function (payment) {
+    alert("Paiement lancé !");
+  }).catch(function (error) {
+    alert("Erreur : " + error.message);
+  });
+});
 
-const payBtn = document.getElementById("payButton");
-
-payBtn.addEventListener("click", () => {
-  Pi.createPayment(paymentData)
-    .then(payment => {
-      return payment.complete();
-    })
-    .then(() => {
-      alert("Paiement réussi !");
-    })
-    .catch(error => {
-      console.error("Erreur paiement Pi:", error);
-    });
+// Bouton pour "ouvrir" l'app
+document.getElementById("appButton").addEventListener("click", function () {
+  alert("Bienvenue dans l'application VenteAuto.Pi !");
 });

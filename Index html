@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Vente Automobile</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VenteAutomobile.Pi</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <img src="logo.png" alt="Logo Vente Automobile" style="width: 120px; margin-bottom: 20px;">
-  <h1>Bienvenue sur Vente Automobile</h1>
-  <button id="payButton">Payer 0.001 π</button>
-  <button onclick="window.location.href='https://vente-automobile-pi-g6hd.vercel.app';">Ouvrir l'application</button>
+  <div class="container">
+    <img src="logo.png" alt="Logo" class="logo" />
+    <h1>VenteAutomobile.Pi</h1>
+    <p>L'application Testnet pour acheter et vendre des véhicules avec Pi Network.</p>
+
+    <button id="appButton">Entrer dans l'application</button>
+    <button id="payButton">Payer 0.001 Pi (test)</button>
+  </div>
+
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
   <script src="pipay.js"></script>
 </body>
 </html>

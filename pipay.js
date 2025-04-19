@@ -1,30 +1,38 @@
-// Initialiser le SDK Pi en mode testnet (sandbox)
+// Initialisation du SDK Pi Network
 Pi.init({ version: "2.0", sandbox: true });
 
-// Événements des boutons
-window.addEventListener("load", function () {
-  const payBtn = document.getElementById("payButton");
-  const appBtn = document.getElementById("appButton");
-
-  if (payBtn) {
-    payBtn.addEventListener("click", function () {
-      Pi.createPayment({
-        amount: 0.001,
-        memo: "Test paiement",
-        metadata: { action: "paiement-test" }
-      })
-        .then(function (payment) {
-          alert("Paiement lancé avec succès !");
-        })
-        .catch(function (error) {
-          alert("Erreur de paiement : " + error.message);
-        });
+// Fonction de paiement
+document.getElementById("payButton").addEventListener("click", async () => {
+  try {
+    const payment = await Pi.createPayment({
+      amount: 0.001,
+      memo: "Paiement testnet pour VenteAuto",
+      metadata: { type: "test-payment" }
     });
-  }
 
-  if (appBtn) {
-    appBtn.addEventListener("click", function () {
-      alert("Application ouverte !");
+    payment.onReadyForServerApproval(async (paymentId) => {
+      console.log("Prêt pour approbation :", paymentId);
+      // Ici tu pourrais appeler ton serveur pour approuver le paiement si tu en as un
+      payment.approve();
     });
+
+    payment.onReadyForServerCompletion((paymentId, txid) => {
+      console.log("Paiement complété :", paymentId, txid);
+    });
+
+    payment.onCancel(() => {
+      console.log("Paiement annulé par l'utilisateur");
+    });
+
+    payment.onError((error) => {
+      console.error("Erreur de paiement :", error);
+    });
+  } catch (err) {
+    console.error("Erreur lors de la création du paiement :", err);
   }
+});
+
+// Bouton "Ouvrir l'application"
+document.getElementById("appButton").addEventListener("click", () => {
+  window.location.href = "https://vente-automobile-pi-g6hd.vercel.app";
 });
